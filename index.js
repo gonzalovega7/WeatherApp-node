@@ -15,7 +15,7 @@ const main = async() => {
         switch (opt) {
             case 1:
                 // Show message
-                const placeToSearch = await readInput('City: ');
+                const placeToSearch = await readInput('City:');
 
                 // Search places
                 const places = await search.city(placeToSearch);
@@ -24,17 +24,16 @@ const main = async() => {
                 const id = await placesToList(places);
                 const selectedId = places.find(p => p.id === id);
 
-                // console.log(selectedId);
-
                 // weather
-
+                const weather = await search.weather(selectedId.lat, selectedId.lng);
+                
                 // show results
                 console.log('\n City information\n'.green);
-                console.log('City: ', selectedId.name);
-                console.log('Lat: ', selectedId.lat);
-                console.log('Lng: ', selectedId.lng);
-                console.log('Min: ');
-                console.log('Max: ');
+                console.log('City:', selectedId.name);
+                console.log('Lat:', selectedId.lat);
+                console.log('Lng:', selectedId.lng);
+                console.log('Temperature:', weather.temp);
+                console.log('Humidity:',` ${weather.hum} %`.yellow);
                 break;
         
             case 2:
